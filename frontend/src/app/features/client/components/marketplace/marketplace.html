@@ -1,0 +1,144 @@
+<div class="container-custom py-8">
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Find Service Providers</h1>
+    <p class="text-gray-600 mt-2">Browse and book qualified professionals for your needs</p>
+  </div>
+
+  <!-- Search Filters -->
+  <mat-card class="mb-8">
+    <div class="p-6">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Profession</mat-label>
+            <mat-select formControlName="profession">
+              <mat-option value="">All Professions</mat-option>
+              <mat-option *ngFor="let prof of professions" [value]="prof">
+                {{ prof }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="location">
+              <mat-option value="">All Locations</mat-option>
+              <mat-option *ngFor="let loc of locations" [value]="loc">
+                {{ loc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Minimum Rating</mat-label>
+            <mat-select formControlName="minRating">
+              <mat-option value="">Any Rating</mat-option>
+              <mat-option value="4">4+ Stars</mat-option>
+              <mat-option value="4.5">4.5+ Stars</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex gap-4">
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon>search</mat-icon>
+            <span class="ml-2">Search</span>
+          </button>
+          <button mat-stroked-button type="button" (click)="onReset()">
+            <mat-icon>refresh</mat-icon>
+            <span class="ml-2">Reset</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center py-12">
+    <p class="text-gray-600">Loading providers...</p>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="!loading && providers.length === 0" class="text-center py-12">
+    <mat-icon class="text-6xl text-gray-400 mb-4">search_off</mat-icon>
+    <p class="text-gray-600 text-lg">No providers found matching your criteria</p>
+  </div>
+
+  <!-- Provider Grid -->
+  <div *ngIf="!loading && providers.length > 0" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <mat-card *ngFor="let provider of providers" class="hover:shadow-lg transition-shadow cursor-pointer">
+        <div class="p-6">
+          <!-- Provider Header -->
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold">
+              {{ provider.profession.charAt(0) }}
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold">{{ provider.profession }}</h3>
+              <p class="text-sm text-gray-600">
+                <mat-icon class="text-sm align-middle">location_on</mat-icon>
+                {{ provider.location }}
+              </p>
+              <div class="flex items-center gap-1 mt-1">
+                <mat-icon *ngFor="let star of getRatingStars(provider.averageRating)" class="text-yellow-500 text-sm">
+                  star
+                </mat-icon>
+                <span class="text-sm text-gray-600 ml-1">
+                  {{ provider.averageRating }} ({{ provider.totalReviews }})
+                </span>
+              </div>
+            </div>
+            <mat-chip *ngIf="provider.isVerified" class="bg-green-100 text-green-800">
+              <mat-icon class="text-sm">verified</mat-icon>
+            </mat-chip>
+          </div>
+
+          <!-- Bio -->
+          <p class="text-gray-700 mb-4 line-clamp-3">
+            {{ provider.bio }}
+          </p>
+
+          <!-- Skills -->
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <mat-chip *ngFor="let skill of provider.skills.split(',').slice(0, 3)" class="bg-blue-50 text-blue-800 text-sm">
+                {{ skill.trim() }}
+              </mat-chip>
+            </div>
+          </div>
+
+          <!-- Rate -->
+          <div class="flex items-center justify-between mb-4 p-3 bg-gray-50 rounded">
+            <span class="text-gray-600">Hourly Rate</span>
+            <span class="text-2xl font-bold text-primary">฿{{ provider.hourlyRate }}</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex gap-2">
+            <button mat-raised-button color="primary" class="flex-1" (click)="bookProvider(provider.id)">
+              <mat-icon>event</mat-icon>
+              <span class="ml-2">Book Now</span>
+            </button>
+            <button mat-stroked-button (click)="viewProvider(provider.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Pagination -->
+    <mat-card>
+      <mat-paginator
+        [length]="totalCount"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        [pageIndex]="pageIndex"
+        (page)="onPageChange($event)"
+        class="border-t">
+      </mat-paginator>
+    </mat-card>
+  </div>
+</div>

@@ -14,6 +14,11 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Angular build artifacts
+frontend/dist/
+frontend/.angular/
+frontend/node_modules/
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 

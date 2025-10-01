@@ -1,0 +1,121 @@
+<div class="container-custom py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Provider Dashboard</h1>
+    <p class="text-gray-600 mt-2">Welcome back! Here's your income summary.</p>
+  </div>
+
+  <div *ngIf="loading" class="flex justify-center items-center h-64">
+    <div class="text-gray-600">Loading...</div>
+  </div>
+
+  <div *ngIf="!loading && incomeSummary" class="space-y-6">
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <mat-card class="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-blue-100 text-sm">Total Income</p>
+              <h3 class="text-3xl font-bold mt-2">฿{{ incomeSummary.totalIncome | number:'1.2-2' }}</h3>
+            </div>
+            <mat-icon class="text-5xl text-blue-200">attach_money</mat-icon>
+          </div>
+        </div>
+      </mat-card>
+
+      <mat-card class="bg-gradient-to-br from-green-500 to-green-600 text-white">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-green-100 text-sm">Net Income</p>
+              <h3 class="text-3xl font-bold mt-2">฿{{ incomeSummary.netIncome | number:'1.2-2' }}</h3>
+            </div>
+            <mat-icon class="text-5xl text-green-200">account_balance_wallet</mat-icon>
+          </div>
+        </div>
+      </mat-card>
+
+      <mat-card class="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-purple-100 text-sm">Total Bookings</p>
+              <h3 class="text-3xl font-bold mt-2">{{ incomeSummary.totalBookings }}</h3>
+            </div>
+            <mat-icon class="text-5xl text-purple-200">event</mat-icon>
+          </div>
+        </div>
+      </mat-card>
+
+      <mat-card class="bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+        <div class="p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-orange-100 text-sm">Tax Withheld</p>
+              <h3 class="text-3xl font-bold mt-2">฿{{ incomeSummary.withholdingTax | number:'1.2-2' }}</h3>
+            </div>
+            <mat-icon class="text-5xl text-orange-200">receipt</mat-icon>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <mat-card>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-4">Income Breakdown</h3>
+          <div class="h-80">
+            <canvas baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              type="bar">
+            </canvas>
+          </div>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-4">Quick Actions</h3>
+          <div class="space-y-3">
+            <button mat-raised-button color="primary" class="w-full" routerLink="/provider/profile">
+              <mat-icon>person</mat-icon>
+              <span class="ml-2">Edit Profile</span>
+            </button>
+            <button mat-raised-button color="accent" class="w-full" routerLink="/provider/income-summary">
+              <mat-icon>assessment</mat-icon>
+              <span class="ml-2">View Income Summary</span>
+            </button>
+            <button mat-stroked-button class="w-full" routerLink="/provider/bookings">
+              <mat-icon>list</mat-icon>
+              <span class="ml-2">View Bookings</span>
+            </button>
+            <button mat-stroked-button class="w-full" routerLink="/provider/tax-documents">
+              <mat-icon>description</mat-icon>
+              <span class="ml-2">Tax Documents</span>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Year Info -->
+    <mat-card>
+      <div class="p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-semibold">Year {{ incomeSummary.year }} Summary</h3>
+            <p class="text-gray-600 mt-1">
+              Platform Commission: ฿{{ incomeSummary.platformCommission | number:'1.2-2' }}
+            </p>
+          </div>
+          <button mat-raised-button color="primary">
+            <mat-icon>file_download</mat-icon>
+            <span class="ml-2">Download Report</span>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
