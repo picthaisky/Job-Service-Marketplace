@@ -1,0 +1,67 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full">
+    <div>
+      <h2 class="text-center text-3xl font-bold text-gray-900 mb-2">
+        Job Service Marketplace
+      </h2>
+      <p class="text-center text-gray-600 mb-8">Sign in to your account</p>
+    </div>
+
+    <mat-card class="p-8">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="space-y-6">
+          <!-- Email Field -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="your@email.com">
+            <mat-error *ngIf="f['email'].errors?.['required']">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="f['email'].errors?.['email']">
+              Please enter a valid email
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Password Field -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="••••••••">
+            <mat-error *ngIf="f['password'].errors?.['required']">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="f['password'].errors?.['minlength']">
+              Password must be at least 6 characters
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Error Message -->
+          <div *ngIf="error" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            {{ error }}
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit" 
+            class="w-full"
+            [disabled]="loading"
+          >
+            <span *ngIf="!loading">Sign In</span>
+            <mat-spinner *ngIf="loading" diameter="20" class="inline-block"></mat-spinner>
+          </button>
+
+          <!-- Register Link -->
+          <div class="text-center mt-4">
+            <p class="text-gray-600">
+              Don't have an account? 
+              <a routerLink="/auth/register" class="text-primary hover:text-blue-700 font-medium">
+                Register here
+              </a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
