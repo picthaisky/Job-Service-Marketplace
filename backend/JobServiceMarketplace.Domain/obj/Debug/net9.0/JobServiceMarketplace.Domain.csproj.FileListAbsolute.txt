@@ -1,0 +1,12 @@
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/bin/Debug/net9.0/JobServiceMarketplace.Domain.deps.json
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/bin/Debug/net9.0/JobServiceMarketplace.Domain.dll
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/bin/Debug/net9.0/JobServiceMarketplace.Domain.pdb
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/JobServiceMarketplace.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/JobServiceMarketplace.Domain.AssemblyInfoInputs.cache
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/JobServiceMarketplace.Domain.AssemblyInfo.cs
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/JobServiceMarketplace.Domain.csproj.CoreCompileInputs.cache
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/JobServiceMarketplace.Domain.sourcelink.json
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/JobServiceMarketplace.Domain.dll
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/refint/JobServiceMarketplace.Domain.dll
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/JobServiceMarketplace.Domain.pdb
+/home/runner/work/Job-Service-Marketplace/Job-Service-Marketplace/backend/JobServiceMarketplace.Domain/obj/Debug/net9.0/ref/JobServiceMarketplace.Domain.dll
